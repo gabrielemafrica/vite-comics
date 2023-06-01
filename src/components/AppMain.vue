@@ -143,6 +143,7 @@ main {
         }
 
         button {
+            margin-top: 10px;
             cursor: pointer;
             background-color: $primary;
             color: white;
