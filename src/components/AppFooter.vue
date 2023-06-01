@@ -1,5 +1,7 @@
 <script>
 import AppBottomFooter from './AppBottomFooter.vue'
+import AppUpperFooter from './AppUpperFooter.vue'
+
 export default {
     name: "AppFooter",
     methods: {
@@ -8,7 +10,8 @@ export default {
         }
     },
     components: {
-        AppBottomFooter
+        AppBottomFooter,
+        AppUpperFooter
     },
     data() {
         return {
@@ -171,7 +174,8 @@ export default {
 
 <template>
     <footer>
-        <!-- footer topper -->
+        <!-- footer upper -->
+        <AppUpperFooter />
         <!-- footer centre -->
         <div class="f-centre">
             <div class="container">
