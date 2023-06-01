@@ -1,4 +1,5 @@
 <script>
+import AppBottomFooter from './AppBottomFooter.vue'
 export default {
     name: "AppFooter",
     methods: {
@@ -6,48 +7,40 @@ export default {
             return new URL(imgPath, import.meta.url).href;
         }
     },
+    components: {
+        AppBottomFooter
+    },
     data() {
         return {
             sectionsLinks: [
                 {
-                    title: "dc comics",
+                    title: "Sites",
                     links: [
                         {
-                            title: "Characters",
+                            title: "DC",
                             url: "#",
                             current: false,
                         },
                         {
-                            title: "Comics",
+                            title: "MAD Magazine",
                             url: "#",
                             current: false,
                         },
                         {
-                            title: "Movies",
+                            title: "DC Kids",
                             url: "#",
                             current: false,
                         },
                         {
-                            title: "TV",
+                            title: "DC Universe",
                             url: "#",
                             current: false,
                         },
                         {
-                            title: "Games",
+                            title: "DC Power Visa",
                             url: "#",
                             current: false,
                         },
-                        {
-                            title: "Videos",
-                            url: "#",
-                            current: false,
-                        },
-                        {
-                            title: "News",
-                            url: "#",
-                            current: false,
-                        },
-
                     ],
                 },
                 {
@@ -112,33 +105,44 @@ export default {
                     ],
                 },
                 {
-                    title: "Sites",
+                    title: "dc comics",
                     links: [
                         {
-                            title: "DC",
+                            title: "Characters",
                             url: "#",
                             current: false,
                         },
                         {
-                            title: "MAD Magazine",
+                            title: "Comics",
                             url: "#",
                             current: false,
                         },
                         {
-                            title: "DC Kids",
+                            title: "Movies",
                             url: "#",
                             current: false,
                         },
                         {
-                            title: "DC Universe",
+                            title: "TV",
                             url: "#",
                             current: false,
                         },
                         {
-                            title: "DC Power Visa",
+                            title: "Games",
                             url: "#",
                             current: false,
                         },
+                        {
+                            title: "Videos",
+                            url: "#",
+                            current: false,
+                        },
+                        {
+                            title: "News",
+                            url: "#",
+                            current: false,
+                        },
+
                     ],
                 },
                 {
@@ -172,11 +176,11 @@ export default {
         <div class="f-centre">
             <div class="container">
                 <div class="footer-links">
-                    <div class="links-section" v-for="section in sectionsLinks">
+                    <div class="links-section" v-for="(section, index) in sectionsLinks" :key="index">
                         <h4>{{ section.title }}</h4>
                         <nav>
                             <ul>
-                                <li v-for="link in section.links">
+                                <li v-for="(link, index) in section.links" :key="index">
                                     <a :href="link.url" :class="{ active: link.current }">
                                         {{ link.title }}
                                     </a>
@@ -185,47 +189,11 @@ export default {
                         </nav>
                     </div>
                 </div>
-                <div class="footer-logo">
-                    <img :src="getImageURL('../assets/images/dc-logo-bg.png')" />
-                </div>
             </div>
         </div>
 
         <!-- footer bottom -->
-        <div class="cols container">
-            <a class="logo" href="/">
-                <img src="/dc-logo.png" alt="dc">
-            </a>
-
-            <div class="footer-links">
-                <h4>DC</h4>
-
-                <nav>
-                    <ul>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="footer-links">
-                <h4>DC</h4>
-
-                <nav>
-                    <ul>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                    </ul>
-                </nav>
-
-            </div>
-        </div>
-        <img :src="getImageURL(`../assets/images/footer-bg.jpg`)" alt="dc">
+        <AppBottomFooter />
     </footer>
 </template>
 
@@ -246,26 +214,38 @@ footer {
 
     .f-centre {
 
-        background-image: url(../assets/images/footer-bg.jpg);
-        background-size: cover;
+        background-image: url(../assets/images/dc-logo-bg.png), url(../assets/images/footer-bg.jpg);
+        background-repeat: no-repeat;
+        background-size: 25%, cover;
+        background-position-x: 80%, 0;
+        background-position-y: center, 0;
+        padding: 40px 0;
+
 
         .links-section {
 
-            float: left;
+            float: right;
             width: calc(100% / 3);
 
             h4 {
                 text-transform: uppercase;
+                margin-bottom: 10px;
             }
 
             ul {
                 list-style-type: none;
                 margin: 0;
                 padding: 0;
+                margin-bottom: 10px;
+
+
 
                 li a {
                     color: white;
                     text-decoration: none;
+                    font-size: 12px;
+                    font-weight: lighter;
+
 
                     &:hover {
                         color: $primary;
@@ -273,48 +253,40 @@ footer {
                 }
             }
         }
+    }
+}
 
-        .footer-logo {
 
+.cols {
+    display: flex;
+    margin-bottom: 3rem;
 
-            img {
-                object-fit: contain;
-            }
-        }
+    .logo,
+    .footer-links {
+        flex-basis: calc(100% / 3);
+        padding: 0 1rem;
     }
 
+    h4 {
+        text-transform: uppercase;
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
 
-    .cols {
-        display: flex;
-        margin-bottom: 3rem;
+    ul {
+        list-style: none;
 
-        .logo,
-        .footer-links {
-            flex-basis: calc(100% / 3);
-            padding: 0 1rem;
-        }
-
-        h4 {
-            text-transform: uppercase;
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        ul {
-            list-style: none;
-
-            li a {
+        li a {
 
 
-                display: inline-block;
-                margin-bottom: 0.25rem;
-                text-decoration: none;
-                font-size: 0.875em;
+            display: inline-block;
+            margin-bottom: 0.25rem;
+            text-decoration: none;
+            font-size: 0.875em;
 
-                &:hover {
-                    color: $primary;
-                }
+            &:hover {
+                color: $primary;
             }
         }
     }
